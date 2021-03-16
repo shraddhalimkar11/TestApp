@@ -1,0 +1,72 @@
+
+<div class="example-header" style="padding: 2%;">
+  <h1>Sort by name, joining date and Search By Name</h1>
+  <h5>Implemented angular material table it gives column sorting functionality and global search functionality. Type input in the below search box and it will give result based on your search</h5>
+  <mat-form-field>
+      <input matInput (keyup)="searchByParam($event.target.value)" placeholder="Search by any parameter">
+  </mat-form-field>
+</div>
+
+<div class="example-container" style="padding: 2%;">
+  
+  <mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+  
+
+    <ng-container *ngFor="let disCol of (columnsToDisplay); let colIndex = index" matColumnDef="{{disCol}}">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{disCol | uppercase}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element[disCol]}}
+          </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+</div>
+
+<div class="example-container" style="padding: 2%;">
+  <h1>Display all candidates with experience more than 2 years</h1>
+  <mat-table class=" mat-elevation-z8" [dataSource]="dataSourceTwoYrExp" matSort>
+  
+
+    <ng-container *ngFor="let disCol of (columnsToDisplayTwoYrExp); let colIndex = index" matColumnDef="{{disCol}}">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{disCol | uppercase}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element[disCol]}}
+          </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsTwoYrExp"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsTwoYrExp;"></mat-row>
+  </mat-table>
+  
+</div>
+
+<div class="example-container" style="padding: 2%;">
+  <h1>Remove all candidates from 'Development' department</h1>
+  <h5>Following table displays the data after removing "Development Department"</h5>
+  <mat-table class=" mat-elevation-z8" [dataSource]="dataSourceRemoveDevelopmentDept" matSort>
+  
+
+    <ng-container *ngFor="let disCol of (columnsToDisplayRemoveDevelopmentDept); let colIndex = index" matColumnDef="{{disCol}}">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{disCol | uppercase}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{element[disCol]}}
+          </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsRemoveDevelopmentDept"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsRemoveDevelopmentDept;"></mat-row>
+  </mat-table>
+  
+</div>
+
+<div>
+    <h1>Get distinct departments and count of candidates in each</h1>
+  <ul>
+    <li *ngFor="let department of uniqueDepartment">
+        Department : {{department.department}}, Count :{{department.count}}
+    </li>
+  </ul>
+</div>
